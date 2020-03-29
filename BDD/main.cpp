@@ -3,10 +3,10 @@
 
 using namespace std;
 
-#define N 9 // кол-во объектов/значений
-#define M 4 // кол-во свойств
-#define LOG_N 4 // кол-во переменных для кодирования одного значения свойства
-#define N_VAR N*M*LOG_N // кол-во булевых переменных
+#define N 9 // number of objects/values
+#define M 4 // number of properties
+#define LOG_N 4 // number of variables to encode one property value
+#define N_VAR N*M*LOG_N // number of boolean variables
 #define K 15
 
 ofstream out;
@@ -22,11 +22,11 @@ void set_constraint_6(bdd& task, bdd p[M][N][N]);
 void set_constraint_7(bdd& task, bdd p[M][N][N]);
 
 int main(void) {
-    // инициализация
+    // Initialization
     bdd_init(10000000, 100000);
     bdd_setvarnum(N_VAR);
     
-    // ->--- вводим функцию p(k, i, j) следующим образом (p[k][i][j]):
+    // ->--- Enter function p(k, i, j) as follows (p[k][i][j]):
     bdd p[M][N][N];
     
     for (unsigned obj = 0; obj < N; obj++) {
@@ -43,7 +43,7 @@ int main(void) {
     
     bdd result = bddtrue;
     
-    // ограничение типа 1
+    // Constraints of type 1
     set_constraint_1(result, p, 0, 0, 0);
     set_constraint_1(result, p, 2, 0, 5);
     set_constraint_1(result, p, 3, 0, 3);
@@ -64,7 +64,7 @@ int main(void) {
     set_constraint_1(result, p, 1, 6, 7);
     set_constraint_1(result, p, 2, 6, 7);
     
-    // ограничение типа 2
+    // Constraints of type 2
     set_constraint_2(result, p, 1, 1, 2, 2);
     set_constraint_2(result, p, 3, 4, 2, 3);
     set_constraint_2(result, p, 2, 6, 3, 7);
@@ -73,14 +73,14 @@ int main(void) {
     set_constraint_2(result, p, 2, 4, 1, 4);
     set_constraint_2(result, p, 1, 6, 3, 6);
     
-    // ограничение типа 3
+    // Constraints of type 3
     set_constraint_3(result, p, 0, 2, 1, 3, true);
     set_constraint_3(result, p, 1, 3, 2, 4, true);
     set_constraint_3(result, p, 2, 4, 3, 5, false);
     set_constraint_3(result, p, 3, 5, 0, 6, false);
     
     
-    // ограничение типа 4
+    // Constraints of type 4
     set_constraint_4(result, p, 0, 1, 0, 2);
     set_constraint_4(result, p, 1, 2, 1, 3);
     set_constraint_4(result, p, 2, 3, 2, 4);
@@ -88,12 +88,12 @@ int main(void) {
     set_constraint_4(result, p, 0, 5, 0, 6);
     set_constraint_4(result, p, 2, 4, 2, 0);
     
-    // остальные ограничения
+    // Constraints of type 5, 6, 7
     set_constraint_5(result, p);
     set_constraint_6(result, p);
     set_constraint_7(result, p);
     
-    // вывод результатов
+    // Output
     out.open("out.txt");
     unsigned satcount = (unsigned)bdd_satcount(result);
     out << satcount << " solutions:\n" << endl;
@@ -119,7 +119,6 @@ void set_constraint_3(bdd& task, bdd p[M][N][N], int prop1, int val1, int prop2,
         offset = 2;
         for (unsigned i = 0; i < N; i++) {
             if (i % 3 == 1 || i % 3 == 2) {
-                
                 if (i + offset < N) {
                     task &= !(p[prop1][i + offset][val1] ^ p[prop2][i][val2]);
                 }
@@ -156,7 +155,6 @@ void set_constraint_4(bdd& task, bdd p[M][N][N], int prop1, int val1, int prop2,
     offset = 4;
     for (unsigned i = 0; i < N; i++) {
         if (i % 3 == 0 || i % 3 == 1) {
-            
             if (i + offset < N) {
                 temp2 &= !(p[prop1][i + offset][val1] ^ p[prop2][i][val2]);
             }
@@ -224,6 +222,7 @@ void set_constraint_7(bdd& task, bdd p[M][N][N]) {
                         }
                     }
                 }
+                
                 for (unsigned p2 = 0; p2 < N; p2++) {
                     if (i % 3 == 1) {
                         int offset1 = 2;
@@ -251,29 +250,23 @@ void set_constraint_7(bdd& task, bdd p[M][N][N]) {
 
 char var[N_VAR];
 
-void print(void)
-{
-    for (unsigned i = 0; i < N; i++)
-    {
-        out<<i<<": ";
-        for (unsigned j = 0; j < M; j++)
-        {
-            int J = i*M*LOG_N + j*LOG_N;
+void print(void) {
+    for (unsigned i = 0; i < N; i++) {
+        out << i << ": ";
+        for (unsigned j = 0; j < M; j++) {
+            int J = i * M * LOG_N + j * LOG_N;
             int num = 0;
             for (unsigned k = 0; k < LOG_N; k++) num += (unsigned)(var[J + k] << k);
-            out<<num<<' ';
+            out << num << ' ';
         }
-        out<<endl;
+        out << endl;
     }
-    out<<endl;
+    out << endl;
 }
 
-void build(char* varset, unsigned n, unsigned I)
-{
-    if (I == n - 1)
-    {
-        if (varset[I] >= 0)
-        {
+void build(char* varset, unsigned n, unsigned I) {
+    if (I == n - 1) {
+        if (varset[I] >= 0) {
             var[I] = varset[I];
             print();
             return;
@@ -284,19 +277,19 @@ void build(char* varset, unsigned n, unsigned I)
         print();
         return;
     }
-    if (varset[I] >= 0)
-    {
+    
+    if (varset[I] >= 0) {
         var[I] = varset[I];
         build(varset, n, I + 1);
         return;
     }
+    
     var[I] = 0;
     build(varset, n, I + 1);
     var[I] = 1;
     build(varset, n, I + 1);
 }
 
-void fun(char* varset, int size)
-{
+void fun(char* varset, int size) {
     build(varset, size, 0);
 }

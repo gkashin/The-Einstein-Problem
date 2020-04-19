@@ -23,7 +23,7 @@ Set the neighbor relations like this (marked with an asterisk):
 \- | \* | \-
 \- | \- | \-
 
-Also each financial report has 4 properties:
+Each financial report has 4 properties:
 * Name
 * Profit
 * Turnover

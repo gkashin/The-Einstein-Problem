@@ -25,7 +25,7 @@ Set the neighbor relations like this (marked with an asterisk):
 
 Each financial report has 4 properties:
 * Name of the company
-* Profit
+* Its profit
 * Annual turnover
 * Event happened with the company
 
@@ -101,4 +101,4 @@ Report number|Company name|Profit, $B|Turnover, $B|Event
 5 | Twitter | 60 | 241 | Fired all employees
 6 | Uber | 10 | 84 | Got an investment
 7 | Facebook | 18 | 92 | Bought a startup
-8 | Google | 1 | 265 | Sold to another company
+8 | Google | 1 | 265 | Was sold to another company

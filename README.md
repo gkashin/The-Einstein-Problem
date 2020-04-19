@@ -1,4 +1,4 @@
-# Einstein-Problem
+# The Einstein Problem
 Solving the Einstein Problem using the *[BuDDy](https://sourceforge.net/projects/buddy/)* library
 
 ## Formulation of the Problem

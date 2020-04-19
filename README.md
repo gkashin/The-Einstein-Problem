@@ -2,7 +2,7 @@
 Solving the Einstein Problem using the *[BuDDy](https://sourceforge.net/projects/buddy/)* library
 
 ## Formulation of the Problem
-Let there be N = 9 objects. The objects are located as follows:
+Let there be N = 9 objects (in our case these are financial reports of the companies). The objects are located as follows:
 
 |  |   |  |
 :-:|:-:|:-:
@@ -23,10 +23,16 @@ Set the neighbor relations like this (marked with an asterisk):
 \- | \* | \-
 \- | \- | \-
 
+Also each financial report has 4 properties:
+* Name
+* Profit
+* Turnover
+* Event
+
 It is needed to do the following:
 - [X] Select M = 4 properties that take N = 9 different values 
-- [X] Set constraints
-- [X] Find one right solution (out of all the 2^144 possible ones)
+- [ ] Set constraints
+- [ ] Find one right solution (out of all the 2^144 possible ones)
 
 ## Constraints
 We have 7 constraints that limit the scope of all possible answers:

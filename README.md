@@ -24,10 +24,10 @@ Set the neighbor relations like this (marked with an asterisk):
 \- | \- | \-
 
 Each financial report has 4 properties:
-* Name
+* Name of the company
 * Profit
-* Turnover
-* Event
+* Annual turnover
+* Event happened with the company
 
 It is needed to do the following:
 - [X] Select M = 4 properties that take N = 9 different values 
@@ -45,7 +45,7 @@ We have 7 constraints that limit the scope of all possible answers:
 7. The sum of properties of neighboring objects should not be more than some value (say 15)
 
 ## Interpretation
-*At the end of 2019, 9 different companies published their financial statements. These reports were printed in Forbes in a specific order. Each report contains the following information - the name of the company, its net profit and turnover, as well as the main event that happened to it during this year. Unfortunately, the dog chewed on the magazine, so some lines were spoiled.*
+*"At the end of 2019, 9 different companies published their financial statements. These reports were printed in Forbes in a specific order. Each report contains the following information - the name of the company, its net profit and turnover, as well as the main event that happened to it during this year. Unfortunately, the dog chewed on the magazine, so some lines were spoiled."*
 
 But the following is known:
 * First type of constraints:

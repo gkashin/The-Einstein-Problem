@@ -73,7 +73,7 @@ But the following is known:
   * The report of the company that fired all employees lies next to the report of the company that received the investment;
   * The Twitter report is next to the Uber report.
   
-Based on known information, it is required to restore all the data of financial reports.
+Based on known information, it is required to restore all the data of financial reports
 
 ## Output
 ```
